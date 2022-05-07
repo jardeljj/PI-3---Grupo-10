@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{LayoutPadrao}">
+
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Lista de Clientes</title>    
+    </head>
+    <section layout:fragment="conteudo">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h1 class="panel-title">Lista de Clientes</h1>
+                <a class="btn btn-link" style="float: right; padding: 0px"href="/cadastro/cliente">Novo Cliente</a>
+            </div>
+
+            <div class="panel-body">
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center col-md-1">#</th>
+                            <th>Nome</th>
+                            <th class="text-center col-md-2">CPF</th>
+                            <th class="text-center col-md-2">Telefone</th>
+                            <th class="text-center col-md-2">Status</th>
+                            <th class="col-md-1"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="cliente : ${clientes}">
+                            <td class="text-center" th:text="${cliente.codigo}"></td>
+                            <td th:text="${cliente.nome}"></td>
+                            <td class="text-center" th:text="${cliente.CPF}"></td>
+                            <td class="text-center" th:text="${cliente.telefone}|"></td>
+                            <td class="text-center" >
+                                <span class="label" th:text="${cliente.status.descricao}"
+                                      th:classappend="${cliente.inativo ? 'label-danger' : 'label-success'}"></span>
+                            </td>
+                            <td class="text-center"></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6" th:if="${#lists.isEmpty(clientes)}">Nenhum titulo achado</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</html>

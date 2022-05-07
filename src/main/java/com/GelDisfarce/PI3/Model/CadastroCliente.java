@@ -65,6 +65,10 @@ public class CadastroCliente {
     public void setStatus(StatusCliente status) {
         this.status = status;
     }
+    
+    public boolean isInativo(){
+        return StatusCliente.INATIVO.equals(this.status);
+    }
 
     @Override
     public int hashCode() {

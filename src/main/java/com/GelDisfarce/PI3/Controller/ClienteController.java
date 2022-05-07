@@ -39,6 +39,15 @@ public class ClienteController {
        return mv;
     }
     
+    @RequestMapping
+    public ModelAndView ListarCliente(){
+        List<CadastroCliente> todosClientes = CadastroClientes.findAll();
+        ModelAndView mv = new ModelAndView("ListaCliente");
+        mv.addObject("clientes", todosClientes);
+        return mv;
+    }
+    
+    
     @ModelAttribute("todosStatusCadastro")
     public List<StatusCliente> todosStatusClientes() {
         return Arrays.asList(StatusCliente.values());
