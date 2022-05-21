@@ -34,10 +34,10 @@ public class CadastroCliente {
     @Size(max = 11, message = "Preencha corretamente o CPF com 11 caracteres")
     private String CPF;
     
-    @NotBlank(message = "Campo telefone não pode está vazio")
-    @Size(max = 12, message = "Telefone pode conter no maximo 12 números")
+    @NotBlank(message = "Campo Telefone está incorreto")
     @NotNull
-    private String telefone;
+    @Size(max = 20)
+    String telefone;
     
     @Enumerated(EnumType.STRING)
     private StatusCliente status;

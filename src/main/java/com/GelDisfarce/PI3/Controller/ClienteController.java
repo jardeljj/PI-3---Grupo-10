@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
@@ -34,15 +35,14 @@ public class ClienteController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView salvar(@Validated CadastroCliente cadastroCliente, Errors errors) {
-        ModelAndView mv = new ModelAndView("CadastroCliente");
+    public String salvar(@Validated CadastroCliente cadastroCliente, Errors errors, RedirectAttributes attributes) {
         if (errors.hasErrors()) {
-            return mv;
+            return "CadastroCliente";
         }
         CadastroClientes.save(cadastroCliente);
 
-        mv.addObject("mensagem", "Cliente Cadastrado com Sucesso!!!");
-        return mv;
+        attributes.addFlashAttribute("mensagem", "Cliente Cadastrado com Sucesso!!!");
+        return "redirect:/cadastro/cliente";
     }
 
     @RequestMapping
