@@ -8,6 +8,10 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
 
 /**
  *
@@ -15,12 +19,24 @@ import javax.persistence.Id;
  */
 @Entity
 public class CadastroCliente {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
     
+    @NotBlank(message = "Campo nome não pode está vazio")
+    @NotNull
+    @Size(max = 30, message = "Gentileza abreviar o nome")
     private String nome;
+    
+    @NotBlank(message = "Campo CPF não pode está vazio")
+    @NotNull
+    @Size(max = 11, message = "Preencha corretamente o CPF com 11 caracteres")
     private String CPF;
+    
+    @NotBlank(message = "Campo telefone não pode está vazio")
+    @Size(max = 12, message = "Telefone pode conter no maximo 12 números")
+    @NotNull
     private String telefone;
     
     @Enumerated(EnumType.STRING)

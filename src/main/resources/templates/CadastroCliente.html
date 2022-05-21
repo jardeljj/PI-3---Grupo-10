@@ -8,11 +8,9 @@
         <title>Cadastro de Cliente</title>
     </head>
     <section layout:fragment="conteudo">
-        <form class="form-horizontal" method="POST" action="/cadastro">
-            <div class="alert alert-success" role="alert" th:if="${!#strings.isEmpty(mensagem)}">
-                <button type="button" class="close" data-dismiss="alert"></button>
-                <span th:text="${mensagem}"></span>
-            </div>   
+        <form class="form-horizontal" method="POST" action="/cadastro" th:object="${cadastroCliente}">
+           <div th:replace="Mensagem"></div>
+           
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h1 class="panel-title">Novo Cliente</h1>
@@ -20,28 +18,28 @@
                 </div>
 
                 <div class="panel-body">
-                    <div class="form-group">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('nome')} ? has-error">
                         <label for="nome" class="col-sm-2 control-label">Nome:</label>
                         <div class="col-sm-4"> 
-                            <input type="text" class="form-control" id="nome" name="nome"/>
+                            <input type="text" class="form-control" id="nome" name="nome" />
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('CPF')} ? has-error">
                         <label for="CPF" class="col-sm-2 control-label">CPF:</label>
                         <div class="col-sm-2">  
-                            <input type="text" class="form-control"	id="dataVencimento" name="CPF" />
+                            <input type="text" class="form-control"	id="CPF" name="CPF" />
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" th:classappend="${#fields.hasErrors('telefone')} ? has-error">
                         <label for="telefone" class="col-sm-2 control-label">Telefone:</label>
                         <div class="col-sm-2">   
-                            <input type="number" class="form-control" id="telefone" name="telefone"/>
+                            <input type="text'" class="form-control" id="telefone" name="telefone" />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="status" class="col-sm-2 control-label">Status</label>
                         <div class="col-sm-2">
-                            <select class="form-control" name="status">
+                            <select class="form-control" name="status" required="">
                                 <option th:each="status : ${todosStatusCadastro}" th:value="${status}" th:text="${status.descricao}"></option>
 
                             </select>
