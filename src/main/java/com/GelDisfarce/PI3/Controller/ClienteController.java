@@ -23,7 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
  * @author jardel
  */
 @Controller
-@RequestMapping("/cadastro")
+@RequestMapping("/cliente")
 public class ClienteController {
     
     private static final String CADASTRO_VIEW = "CadastroCliente";
@@ -31,7 +31,7 @@ public class ClienteController {
     @Autowired
     private CadastroClientes CadastroClientes;
 
-    @RequestMapping("/cliente")
+    @RequestMapping("/novo")
     public ModelAndView novo() {
         ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
         mv.addObject("todosStatusCadastro", StatusCliente.values());
@@ -47,7 +47,7 @@ public class ClienteController {
         CadastroClientes.save(cadastroCliente);
 
         attributes.addFlashAttribute("mensagem", "Cliente Cadastrado com Sucesso!!!");
-        return "redirect:/cadastro/cliente";
+        return "redirect:/cliente/novo";
     }
 
     @RequestMapping
