@@ -25,7 +25,7 @@ public class CadastroCliente {
     private Long codigo;
     
     @NotBlank(message = "Campo nome não pode está vazio")
-    @NotNull
+    
     @Size(max = 30, message = "Gentileza abreviar o nome")
     private String nome;
     

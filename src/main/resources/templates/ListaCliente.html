@@ -16,6 +16,22 @@
             </div>
 
             <div class="panel-body">
+                
+                <form method="GET" class="form-horizontal" action="/cadastro">
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="Pesquise aqui" autofocus="autofocus"
+                                       name="nome">
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-default">
+                                        <i class="glyphicon glyphicon-search"></i>
+                                </span>
+                            </div>
+                        </div>                            
+                    </div>
+                </form>
+                
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -37,7 +53,12 @@
                                 <span class="label" th:text="${cliente.status.descricao}"
                                       th:classappend="${cliente.inativo ? 'label-danger' : 'label-success'}"></span>
                             </td>
-                            <td class="text-center"></td>
+                            <td class="text-center">
+                            <a class="btn btn-link btn-xs" th:href="@{/cadastro/{codigo}(codigo=${cliente.codigo})}">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                                </td>
+                        </tr>
                         </tr>
                         <tr>
                             <td colspan="6" th:if="${#lists.isEmpty(clientes)}">Nenhum titulo achado</td>
