@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{LayoutPadrao}">
+
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Home</title>    
+    </head>
+    <section layout:fragment="conteudo">
+        <main role="main" class="principal" style="padding-top: 10px;">
+            <div style="display: flex">
+                <div class="dropdown" style="margin-left: 10px">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                        Cadastros:
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="/administrador/novo">Cadastro de ADM</a>
+                        <a class="dropdown-item" href="/cliente/novo">Cadastro de Cliente</a>
+                        <a class="dropdown-item" href="#">Cadastro de Funcionario</a>
+                        <a class="dropdown-item" href="#">Cadastro de Cargo</a>
+                        <a class="dropdown-item" href="#">Cadastro de Produtos</a>
+                    </div>
+                </div>
+                <div style="margin-left: 10px">
+                    <button type="button" class="btn btn-primary">Caixa</button>
+                    <button type="button" class="btn btn-primary">Relatórios</button>
+                </div>
+            </div>
+        </main>
+    </section>
+</html>

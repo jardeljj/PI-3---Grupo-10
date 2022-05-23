@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{LayoutPadrao}">
+
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Lista de Funcionarios</title>    
+    </head>
+    <section layout:fragment="conteudo">
+        <div class="panel panel-default" style="margin-left: 10px; margin-right: 10px">
+            <div class="panel-heading">
+                <div class="clearfix">
+                    <h1 class="panel-title" style="float: left; padding: 2px">Lista de Funcionarios</h1>
+                    <a class="btn btn-link" style="float: right; padding: 0px"href="/funcionario/novo">Novo Funcionario</a>
+                </div>
+            </div>
+
+            <div class="panel-body">
+
+                <form method="GET" class="form-horizontal" action="/funcionario">
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                            <div class="input-group">
+                                <input class="form-control" placeholder="Pesquise aqui" autofocus="autofocus"
+                                       name="nome">
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-default">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                    </span>
+                            </div>
+                        </div>                            
+                    </div>
+                </form>
+
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th class="text-center col-md-1">#</th>
+                            <th>Nome</th>
+                            <th class="text-center col-md-2">CPF</th>
+                            <th class="text-center col-md-2">Telefone</th>
+                            <th class="text-center col-md-2">Função</th>
+                            <th class="text-center col-md-2">CEP</th>
+                            <th class="text-center col-md-2">Rua</th>
+                            <th class="text-center col-md-2">Bairro</th>
+                            <th class="text-center col-md-2">Cidade</th>
+                            <th class="text-center col-md-2">Estado</th>
+                            <th class="text-center col-md-2">Complemento</th>
+                            <th class="text-center col-md-2">Numero</th>
+                            <th class="text-center col-md-2">Editar</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="funcionario : ${funcionarios}">
+                            <td class="text-center" th:text="${funcionario.codigo}"></td>
+                            <td th:text="${funcionario.nome}"></td>
+                            <td class="text-center" th:text="${funcionario.CPF}"></td>
+                            <td class="text-center" th:text="${funcionario.telefone}|"></td>
+                            <td class="text-center" th:text="${funcionario.funcao}|"></td>
+                            <td class="text-center" th:text="${funcionario.cep}|"></td>
+                            <td class="text-center" th:text="${funcionario.rua}|"></td>
+                            <td class="text-center" th:text="${funcionario.bairro}|"></td>
+                            <td class="text-center" th:text="${funcionario.cidade}|"></td>
+                            <td class="text-center" th:text="${funcionario.estado}|"></td>
+                            <td class="text-center" th:text="${funcionario.complemento}|"></td>
+                            <td class="text-center" th:text="${funcionario.numero}|"></td>
+                            <td class="text-center">
+                                <a class="btn btn-link btn-xs" th:href="@{/funcionario/{codigo}(codigo=${funcionario.codigo})}">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </a>
+                            </td>
+                        </tr>
+                        </tr>
+                        <tr>
+                            <td colspan="11" th:if="${#lists.isEmpty(funcionarios)}">Nenhum titulo achado</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+</html>
