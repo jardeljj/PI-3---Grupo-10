@@ -5,30 +5,67 @@
       layout:decorate="~{LayoutPadrao}">
 
     <head>
-        <meta charset="UTF-8"/>
-        <title>Home</title>    
+        <link rel="stylesheet" type="text/css" href="../static/style.css">
+            <meta charset="UTF-8"/>
+            <title>Home</title>    
     </head>
+    
     <section layout:fragment="conteudo">
-        <main role="main" class="principal" style="padding-top: 10px;">
-            <div style="display: flex">
-                <div class="dropdown" style="margin-left: 10px">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
-                            aria-haspopup="true" aria-expanded="false">
-                        Cadastros:
+        <main>      
+            <div>       
+                <a href="/home" class="logoff">
+                    <svg width="33" height="25" viewBox="0 0 33 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M24.4286 0V3.57143H28.7143V21.4286H24.4286V25H33V0H24.4286ZM24.4286 14.2857V10.7143H8.14286L17.3571 3.03571L14.3571 0.535714L0 12.5L14.3571 24.4643L17.3571 21.9643L8.14286 14.2857H24.4286Z" fill="#F5F5F5"/>
+                    </svg>
+                </a>
+                <h3>Barberia Gel do Disfarce</h3>
+                <button 
+                    type="button" 
+                    name="cancelar" 
+                    class="btn btn-primary">
+                    Agende o Corte
+                </button>
+            </div>
+            <nav>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownRegister" data-bs-toggle="dropdown" aria-expanded="false">
+                        Cadastro
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="/administrador/novo">Cadastro de ADM</a>
-                        <a class="dropdown-item" href="/cliente/novo">Cadastro de Cliente</a>
-                        <a class="dropdown-item" href="#">Cadastro de Funcionario</a>
-                        <a class="dropdown-item" href="#">Cadastro de Cargo</a>
-                        <a class="dropdown-item" href="#">Cadastro de Produtos</a>
-                    </div>
+                    <ul class="dropdown-menu dropdown-menu-dark dropdown-custom" aria-labelledby="dropdownRegister">
+                        <li><a class="dropdown-item" href="/produto/novo">Cad. Produtos</a></li>
+                        <li><a class="dropdown-item" href="/funcionario/novo">Cad. Funcionarios</a></li>
+                        <li><a class="dropdown-item" href="/cliente/novo">Cad. Cliente</a></li>
+                        <li><a class="dropdown-item" href="/administrador/novo">Cad. Administrador</a></li>
+                    </ul>
                 </div>
-                <div style="margin-left: 10px">
-                    <button type="button" class="btn btn-primary">Caixa</button>
-                    <button type="button" class="btn btn-primary">Relatórios</button>
+                <button 
+                    type="button" 
+                    name="cancelar" 
+                    class="btn btn-primary">
+                    Caixa
+                </button>
+                <button 
+                    type="button" 
+                    name="cancelar" 
+                    class="btn btn-primary">
+                    Relatórios
+                </button>
+            </nav>
+        </main>
+        <footer>
+            <div class="footer-text">
+                <h2>
+                    Bem-vindo a Barbearia!
+                </h2>
+                <p>
+                    Faça Barba, Cabelo e Bigode na Nossa Barbearia. Estamos Prontos para Atender Você Bem! Aprimore o Visual de Seu Cabelo e Barba.
+                </p>
+            </div>
+            <div class="footer-img">
+                <div>
+                    <img src="../imagens/fotologin.jpg">
                 </div>
             </div>
-        </main>
+        </footer>
     </section>
 </html>

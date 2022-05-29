@@ -6,20 +6,20 @@
 
     <head>
         <meta charset="UTF-8"/>
-        <title>Lista de Clientes</title>    
+        <title>Relatório de Produtos</title>    
     </head>
     <section layout:fragment="conteudo">
         <div class="panel panel-default" style="margin-left: 10px; margin-right: 10px">
             <div class="panel-heading">
                 <div class="clearfix">
-                    <h1 class="panel-title"style="float: left; padding: 2p">Lista de Clientes</h1>
-                    <a class="btn btn-link" style="float: right; padding: 0px"href="/cliente/novo">Novo Cliente</a>
+                    <h1 class="panel-title"style="float: left; padding: 2p">Relatório de Produtos</h1>
+                    <a class="btn btn-link" style="float: right; padding: 0px"href="/produto/novo">Novo Produto</a>
                 </div>
             </div>
 
             <div class="panel-body">
 
-                <form method="GET" class="form-horizontal" action="/cliente">
+                <form method="GET" class="form-horizontal" action="/produto">
                     <div class="form-group">
                         <div class="col-sm-3">
                             <div class="input-group">
@@ -39,31 +39,31 @@
                         <tr>
                             <th class="text-center col-md-1">#</th>
                             <th>Nome</th>
-                            <th class="text-center col-md-2">CPF</th>
-                            <th class="text-center col-md-2">Telefone</th>
-                            <th class="text-center col-md-2">Status</th>
+                            <th class="text-center col-md-2">Preço</th>
+                            <th class="text-center col-md-2">Quantidade</th>
+                            <th class="text-center col-md-2">Tipo De Produto</th>
                             <th class="col-md-1"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="cliente : ${clientes}">
-                            <td class="text-center" th:text="${cliente.codigo}"></td>
-                            <td th:text="${cliente.nome}"></td>
-                            <td class="text-center" th:text="${cliente.CPF}"></td>
-                            <td class="text-center" th:text="${cliente.telefone}|"></td>
+                        <tr th:each="produto : ${produtos}">
+                            <td class="text-center" th:text="${produto.codigo}"></td>
+                            <td th:text="${produto.nome}"></td>
+                            <td class="text-center" th:text="${produto.preco}"></td>
+                            <td class="text-center" th:text="${produto.quantidade}|"></td>
                             <td class="text-center" >
-                                <span class="label" th:text="${cliente.status.descricao}"
-                                      th:classappend="${cliente.inativo ? 'label-danger' : 'label-success'}"></span>
+                                <span class="label" th:text="${produto.tipoProduto.descricao}"
+                                      th:classappend="${produto.produto ? 'label-primary' : 'label-warning'}"></span>
                             </td>
                             <td class="text-center">
-                                <a class="btn btn-link btn-xs" th:href="@{/cliente/{codigo}(codigo=${cliente.codigo})}">
+                                <a class="btn btn-link btn-xs" th:href="@{/produto/{codigo}(codigo=${produto.codigo})}">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </a>
                             </td>
                         </tr>
                         </tr>
                         <tr>
-                            <td colspan="6" th:if="${#lists.isEmpty(clientes)}">Nenhum titulo achado</td>
+                            <td colspan="6" th:if="${#lists.isEmpty(produtos)}">Nenhum titulo achado</td>
                         </tr>
                     </tbody>
                 </table>
