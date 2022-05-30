@@ -46,7 +46,7 @@
                         <label for="tipoProduto" class="col-sm-2 control-label">Tipo de Produto: </label>
                         <div class="col-sm-2">
                             <select class="form-control" name="tipoProduto" th:field="*{tipoProduto}">
-                                <option th:each="tipoProduto : ${todosTipoFuncao}" th:value="${tipoFuncao}" th:text="${tipoFuncao.descricao}"></option>
+                                <option th:each="tipoProduto : ${todosTipoProduto}" th:value="${tipoProduto}" th:text="${tipoProduto.descricao}"></option>
 
                             </select>
                         </div>

@@ -44,7 +44,7 @@
         }
 
         main{
-            background-image: url(fundo.jpg);
+            background-image: url(../../../imagens/fundot.jpg);
             background-repeat:no-repeat;
             background-position:center;
             background-repeat: no-repeat;
@@ -161,7 +161,7 @@
     <body>
         <main>
             <div>
-                <a href="login.html" class="logoff">
+                <a href="http://localhost:8080" class="logoff">
                     <svg width="33" height="25" viewBox="0 0 33 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M24.4286 0V3.57143H28.7143V21.4286H24.4286V25H33V0H24.4286ZM24.4286 14.2857V10.7143H8.14286L17.3571 3.03571L14.3571 0.535714L0 12.5L14.3571 24.4643L17.3571 21.9643L8.14286 14.2857H24.4286Z" fill="#F5F5F5"/>
                     </svg>
@@ -192,12 +192,17 @@
                     class="btn btn-primary">
                     Caixa
                 </button>
-                <button 
-                    type="button" 
-                    name="cancelar" 
-                    class="btn btn-primary">
-                    Relatórios
-                </button>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownRegister" data-bs-toggle="dropdown" aria-expanded="false">
+                        Relatórios
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark dropdown-custom" aria-labelledby="dropdownRegister">
+                        <li><a class="dropdown-item" href="/produto">Rel. Produtos</a></li>
+                        <li><a class="dropdown-item" href="/funcionario">Rel. Funcionarios</a></li>
+                        <li><a class="dropdown-item" href="/cliente">Rel. Cliente</a></li>
+                        <li><a class="dropdown-item" href="/administrador">Rel. Administrador</a></li>
+                    </ul>
+                </div>
             </nav>
         </main>
         <footer>

@@ -29,7 +29,6 @@ public class CadastroProduto {
     private String nome;
     
   
-    
     @NotNull
     @NumberFormat(pattern = "#,##0.00")
     private BigDecimal preco;
