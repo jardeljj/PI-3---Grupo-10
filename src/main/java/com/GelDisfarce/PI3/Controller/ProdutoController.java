@@ -1,6 +1,5 @@
 package com.GelDisfarce.PI3.Controller;
 
-
 import com.GelDisfarce.PI3.Model.CadastroProduto;
 import com.GelDisfarce.PI3.Model.TipoProduto;
 import com.GelDisfarce.PI3.Repository.CadastroProdutos;
@@ -67,6 +66,14 @@ public class ProdutoController {
         ModelAndView mv = new ModelAndView(CADASTRO_VIEW);
         mv.addObject(cadastroProduto);
         return mv;
+    }
+
+    @RequestMapping(value = "{codigo}", method = RequestMethod.DELETE)
+    public String excluir(@PathVariable Long codigo, RedirectAttributes attributes) {
+        CadastroProdutos.deleteById(codigo);
+
+        attributes.addFlashAttribute("mensagem", "Título excluído com sucesso!");
+        return "redirect:/produto";
     }
 
     @ModelAttribute("todosTipoProduto")

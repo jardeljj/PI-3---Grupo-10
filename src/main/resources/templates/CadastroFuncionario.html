@@ -6,85 +6,15 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
             integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
     crossorigin="anonymous"></script>
-    <script>
 
-        function limpa_formulário_cep() {
-            //Limpa valores do formulário de cep.
-            document.getElementById('rua').value = ("");
-            document.getElementById('bairro').value = ("");
-            document.getElementById('cidade').value = ("");
-            document.getElementById('uf').value = ("");
-            document.getElementById('ibge').value = ("");
-        }
-
-        function meu_callback(conteudo) {
-            if (!("erro" in conteudo)) {
-                //Atualiza os campos com os valores.
-                document.getElementById('rua').value = (conteudo.logradouro);
-                document.getElementById('bairro').value = (conteudo.bairro);
-                document.getElementById('cidade').value = (conteudo.localidade);
-                document.getElementById('uf').value = (conteudo.uf);
-                document.getElementById('ibge').value = (conteudo.ibge);
-            } //end if.
-            else {
-                //CEP não Encontrado.
-                limpa_formulário_cep();
-                alert("CEP não encontrado.");
-            }
-        }
-
-        function pesquisacep(valor) {
-
-            //Nova variável "cep" somente com dígitos.
-            var cep = valor.replace(/\D/g, '');
-
-            //Verifica se campo cep possui valor informado.
-            if (cep != "") {
-
-                //Expressão regular para validar o CEP.
-                var validacep = /^[0-9]{8}$/;
-
-                //Valida o formato do CEP.
-                if (validacep.test(cep)) {
-
-                    //Preenche os campos com "..." enquanto consulta webservice.
-                    document.getElementById('rua').value = "...";
-                    document.getElementById('bairro').value = "...";
-                    document.getElementById('cidade').value = "...";
-                    document.getElementById('uf').value = "...";
-                    document.getElementById('ibge').value = "...";
-
-                    //Cria um elemento javascript.
-                    var script = document.createElement('script');
-
-                    //Sincroniza com o callback.
-                    script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
-
-                    //Insere script no documento e carrega o conteúdo.
-                    document.body.appendChild(script);
-
-                } //end if.
-                else {
-                    //cep é inválido.
-                    limpa_formulário_cep();
-                    alert("Formato de CEP inválido.");
-                }
-            } //end if.
-            else {
-                //cep sem valor, limpa formulário.
-                limpa_formulário_cep();
-            }
-        }
-        ;
-
-    </script>
     <head>
         <meta charset="UTF-8"/>
         <title>Cadastro de Funcionario</title>
     </head>
     <section layout:fragment="conteudo">
         <form class="form-horizontal" method="POST" action="/funcionario" th:object="${cadastroFuncionario}">
-            <div th:replace="Mensagem"></div>
+            <div th:replace="MensagemGeral"></div>
+            <div th:replace="MensagemErro"></div>
 
             <div class="panel panel-default" style="margin-left: 10px; margin-right: 10px">
                 <div class="panel-heading">
@@ -116,17 +46,12 @@
                             <input type="text" class="form-control" id="telefone" th:field="*{telefone}" />
                         </div>
                     </div>
-                    <div class="form-group" th:classappend="${#fields.hasErrors('funcao')} ? has-error">
-                        <label for="fencao" class="col-sm-2 control-label">Função:</label>
-                        <div class="col-sm-2">   
-                            <input type="text" class="form-control" id="funcao" th:field="*{funcao}" />
-                        </div>
-                    </div>
+
                     <div class="form-group" th:classappend="${#fields.hasErrors('cep')} ? has-error">
                         <label for="cep" class="col-sm-2 control-label">CEP:</label>
                         <div class="col-sm-2">      
-                            <input type="text" class="form-control" id="cep" th:field="*{cep}" value="" 
-                                   onblur="pesquisacep(this.value);" size="10" maxlength="9"/>
+                            <input type="text" class="form-control" id="cep" th:field="*{cep}" value="" size="10" maxlength="9"
+                                   onblur="pesquisacep(this.value);"/>
                         </div>
                     </div>
                     <div class="form-group" th:classappend="${#fields.hasErrors('rua')} ? has-error">
@@ -150,7 +75,7 @@
                     <div class="form-group" th:classappend="${#fields.hasErrors('estado')} ? has-error">
                         <label for="estado" class="col-sm-2 control-label">Estado:</label>
                         <div class="col-sm-2">   
-                            <input type="text" class="form-control" id="uf" th:field="*{estado}" />
+                            <input type="text" class="form-control" id="estado" th:field="*{estado}" />
                         </div>
                     </div>
                     <div class="form-group" th:classappend="${#fields.hasErrors('complemento')} ? has-error">
@@ -166,6 +91,15 @@
                         </div>
                     </div>
                     <div class="form-group">
+                        <label for="tipoFuncao" class="col-sm-2 control-label">Função: </label>
+                        <div class="col-sm-2">
+                            <select class="form-control" name="tipoFuncao" th:field="*{tipoFuncao}">
+                                <option th:each="tipoFuncao : ${todosTiposFuncao}" th:value="${tipoFuncao}" 
+                                        th:text="${tipoFuncao.descricao}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-primary">Salvar</button>
                         </div>
@@ -174,4 +108,72 @@
             </div>
         </form>
     </section>
+    <script>
+        function limpa_formulário_cep() {
+            //Limpa valores do formulário de cep.
+            document.getElementById('rua').value = ("");
+            document.getElementById('bairro').value = ("");
+            document.getElementById('cidade').value = ("");
+            document.getElementById('uf').value = ("");
+        }
+
+        function meu_callback(conteudo) {
+            if (!("erro" in conteudo)) {
+                //Atualiza os campos com os valores.
+                document.getElementById('rua').value = (conteudo.logradouro);
+                document.getElementById('bairro').value = (conteudo.bairro);
+                document.getElementById('cidade').value = (conteudo.localidade);
+                document.getElementById('uf').value = (conteudo.uf);
+            } //end if.
+            else {
+                //CEP não Encontrado.
+                limpa_formulário_cep();
+                alert("CEP não encontrado.");
+            }
+        }
+
+        function pesquisacep(valor) {
+
+            //Nova variável "cep" somente com dígitos.
+            var cep = valor.replace(/\D/g, '');
+
+            //Verifica se campo cep possui valor informado.
+            if (cep != "") {
+
+                //Expressão regular para validar o CEP.
+                var validacep = /^[0-9]{8}$/;
+
+                //Valida o formato do CEP.
+                if (validacep.test(cep)) {
+
+                    //Preenche os campos com "..." enquanto consulta webservice.
+                    document.getElementById('rua').value = "...";
+                    document.getElementById('bairro').value = "...";
+                    document.getElementById('cidade').value = "...";
+                    document.getElementById('uf').value = "...";
+
+                    //Cria um elemento javascript.
+                    var script = document.createElement('script');
+
+                    //Sincroniza com o callback.
+                    script.src = 'https://viacep.com.br/ws/' + cep + '/json/?callback=meu_callback';
+
+                    //Insere script no documento e carrega o conteúdo.
+                    document.body.appendChild(script);
+
+                } //end if.
+                else {
+                    //cep é inválido.
+                    limpa_formulário_cep();
+                    alert("Formato de CEP inválido.");
+                }
+            } //end if.
+            else {
+                //cep sem valor, limpa formulário.
+                limpa_formulário_cep();
+            }
+        }
+        ;
+
+    </script>
 </html>

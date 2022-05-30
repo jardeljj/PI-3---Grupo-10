@@ -9,6 +9,7 @@
         <title>Relatório de Produtos</title>    
     </head>
     <section layout:fragment="conteudo">
+        <div th:replace="MensagemGeral"></div>
         <div class="panel panel-default" style="margin-left: 10px; margin-right: 10px">
             <div class="panel-heading">
                 <div class="clearfix">
@@ -59,9 +60,15 @@
                                 <a class="btn btn-link btn-xs" th:href="@{/produto/{codigo}(codigo=${produto.codigo})}">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </a>
+
+                                <a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModal"
+                                   th:attr="data-codigo=${produto.codigo}, data-nome=${produto.nome}">
+
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
                             </td>
                         </tr>
-                        </tr>
+
                         <tr>
                             <td colspan="6" th:if="${#lists.isEmpty(produtos)}">Nenhum titulo achado</td>
                         </tr>
@@ -69,5 +76,6 @@
                 </table>
             </div>
         </div>
+        <div th:replace="DialogoConfirmacaoExclusao"></div>
     </section>
 </html>

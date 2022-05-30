@@ -9,7 +9,8 @@
     </head>
     <section layout:fragment="conteudo">
         <form class="form-horizontal" method="POST" action="/cliente" th:object="${cadastroCliente}">
-            <div th:replace="Mensagem"></div>
+            <div th:replace="MensagemGeral"></div>
+            <div th:replace="MensagemErro"></div>
 
             <div class="panel panel-default" style="margin-left: 10px; margin-right: 10px">
                 <div class="panel-heading">
@@ -45,7 +46,8 @@
                         <label for="status" class="col-sm-2 control-label">Status:</label>
                         <div class="col-sm-2">
                             <select class="form-control" name="status" th:field="*{status}">
-                                <option th:each="status : ${todosStatusCadastro}" th:value="${status}" th:text="${status.descricao}"></option>
+                                <option th:each="status : ${todosStatusCadastro}" th:value="${status}" 
+                                        th:text="${status.descricao}"></option>
 
                             </select>
                         </div>

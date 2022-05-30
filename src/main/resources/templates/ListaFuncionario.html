@@ -9,6 +9,7 @@
         <title>Lista de Funcionarios</title>    
     </head>
     <section layout:fragment="conteudo">
+        <div th:replace="MensagemGeral"></div>
         <div class="panel panel-default" style="margin-left: 10px; margin-right: 10px">
             <div class="panel-heading">
                 <div class="clearfix">
@@ -41,7 +42,6 @@
                             <th>Nome</th>
                             <th class="text-center col-md-2">CPF</th>
                             <th class="text-center col-md-2">Telefone</th>
-                            <th class="text-center col-md-2">Função</th>
                             <th class="text-center col-md-2">CEP</th>
                             <th class="text-center col-md-2">Rua</th>
                             <th class="text-center col-md-2">Bairro</th>
@@ -49,8 +49,8 @@
                             <th class="text-center col-md-2">Estado</th>
                             <th class="text-center col-md-2">Complemento</th>
                             <th class="text-center col-md-2">Numero</th>
-                            <th class="text-center col-md-2">Editar</th>
-
+                            <th class="text-center col-md-2">Função</th>
+                            <th class="text-center col-md-2"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -59,7 +59,6 @@
                             <td th:text="${funcionario.nome}"></td>
                             <td class="text-center" th:text="${funcionario.CPF}"></td>
                             <td class="text-center" th:text="${funcionario.telefone}|"></td>
-                            <td class="text-center" th:text="${funcionario.funcao}|"></td>
                             <td class="text-center" th:text="${funcionario.cep}|"></td>
                             <td class="text-center" th:text="${funcionario.rua}|"></td>
                             <td class="text-center" th:text="${funcionario.bairro}|"></td>
@@ -67,19 +66,28 @@
                             <td class="text-center" th:text="${funcionario.estado}|"></td>
                             <td class="text-center" th:text="${funcionario.complemento}|"></td>
                             <td class="text-center" th:text="${funcionario.numero}|"></td>
+                            <td class="text-center" >
+                                <span class="label" th:text="${funcionario.tipoFuncao.descricao}"
+                                      th:classappend="${funcionario.caixa ? 'label-primary' : 'label-danger'}"></span>
+                            </td>
                             <td class="text-center">
                                 <a class="btn btn-link btn-xs" th:href="@{/funcionario/{codigo}(codigo=${funcionario.codigo})}">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </a>
+                                <a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmaExclusaoFunc"
+                                   th:attr="data-codigo=${funcionario.codigo}, data-nome=${funcionario.nome}">
+
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
                             </td>
                         </tr>
-                        </tr>
                         <tr>
-                            <td colspan="11" th:if="${#lists.isEmpty(funcionarios)}">Nenhum titulo achado</td>
+                            <td colspan="13" th:if="${#lists.isEmpty(funcionarios)}">Nenhum titulo achado</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+        <div th:replace="DialogoExclusaoFunc"></div>
     </section>
 </html>

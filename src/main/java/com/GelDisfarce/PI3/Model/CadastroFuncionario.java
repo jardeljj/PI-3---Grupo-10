@@ -1,7 +1,10 @@
+
 package com.GelDisfarce.PI3.Model;
 
 import java.util.Objects;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -35,10 +38,6 @@ public class CadastroFuncionario {
     @Size(max = 20)
     private String telefone;
 
-    @NotBlank(message = "Campo função não pode está vazio")
-    @NotNull
-    private String funcao;
-
     @NotBlank(message = "Campo cep não pode está vazio")
     @NotNull
     private String cep;
@@ -58,14 +57,15 @@ public class CadastroFuncionario {
     @NotBlank(message = "Campo estado não pode está vazio")
     @NotNull
     private String estado;
-
-    @NotBlank(message = "Campo complemento não pode está vazio")
-    @NotNull
+    
     private String complemento;
 
     @NotBlank(message = "Campo número não pode está vazio")
     @NotNull
     private String numero;
+    
+    @Enumerated(EnumType.STRING)
+    private TipoFuncao tipoFuncao;
 
     public Long getCodigo() {
         return codigo;
@@ -98,15 +98,6 @@ public class CadastroFuncionario {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-
-    public String getFuncao() {
-        return funcao;
-    }
-
-    public void setFuncao(String funcao) {
-        this.funcao = funcao;
-    }
-
     public String getCep() {
         return cep;
     }
@@ -163,37 +154,46 @@ public class CadastroFuncionario {
         this.numero = numero;
     }
 
+    public TipoFuncao getTipoFuncao() {
+        return tipoFuncao;
+    }
+
+    public void setTipoFuncao(TipoFuncao tipoFuncao) {
+        this.tipoFuncao = tipoFuncao;
+    }
+      
+    public boolean isCaixa() {
+        return TipoFuncao.CAIXA.equals(this.tipoFuncao);
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 73 * hash + Objects.hashCode(this.codigo);
-        hash = 73 * hash + Objects.hashCode(this.nome);
-        hash = 73 * hash + Objects.hashCode(this.CPF);
-        hash = 73 * hash + Objects.hashCode(this.telefone);
-        hash = 73 * hash + Objects.hashCode(this.funcao);
-        hash = 73 * hash + Objects.hashCode(this.cep);
-        hash = 73 * hash + Objects.hashCode(this.rua);
-        hash = 73 * hash + Objects.hashCode(this.bairro);
-        hash = 73 * hash + Objects.hashCode(this.cidade);
-        hash = 73 * hash + Objects.hashCode(this.estado);
-        hash = 73 * hash + Objects.hashCode(this.complemento);
-        hash = 73 * hash + Objects.hashCode(this.numero);
+        hash = 47 * hash + Objects.hashCode(this.codigo);
         return hash;
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
-        if (obj == null) {
+        if (this == null) {
             return false;
         }
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final CadastroFuncionario other = (CadastroFuncionario) obj;
+        CadastroFuncionario other = (CadastroFuncionario) obj;
+        if (codigo == null) {
+            if (other.codigo != null) {
+                return false;
+            }
+        } else if (!codigo.equals(other.codigo)) {
+            return false;
+        }
         return true;
-    }
+    }           
+     
 
 }
