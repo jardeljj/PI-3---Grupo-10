@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{LayoutPadrao}">
+    <head>
+        <meta charset="UTF-8"/>
+        <title>Agendamento</title>
+    </head>
+    <section layout:fragment="conteudo">
+        <form class="form-horizontal" method="POST" action="/agendamento" th:object="${cadastroAgendamento}">
+
+            <div th:replace="MensagemGeral"></div>
+            <div th:replace="MensagemErro"></div>
+            
+            <div class="panel panel-default" style="margin-left: 10px; margin-right: 10px">
+                <div class="panel-heading">
+                    <div class="clearfix">
+                        <h1 class="panel-title"style="float: left; padding: 2px">Novo Agendamento</h1>
+                        <a class="btn btn-link" style="float: right; padding: 0px"href="/agendamento">Voltar para Lista de agendamentos</a> 
+                    </div>
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="form-group">
+                        <label for="nome" class="col-sm-2 control-label">Nome:</label>
+                        <div class="col-sm-2">
+                            <select class="form-control" name="nome" th:field="*{nome}">
+                                <option th:each="nome : ${clientes}" th:value="${nome.nome}" 
+                                        th:text="${nome.nome}"></option>
+                            </select> 
+                        </div>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('dataAgendada')} ? has-error">
+                        <label for="dataAgendada" class="col-sm-2 control-label">Data: </label>
+                        <div class="col-sm-2">  
+                            <input type="text" class="form-control"	id="dataAgendada" th:field="*{dataAgendada}" />
+                        </div>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('horario')} ? has-error">
+                        <label for="horario" class="col-sm-2 control-label">Horario: </label>
+                        <div class="col-sm-2">  
+                            <input type="text" class="form-control"	id="horario" th:field="*{horario}" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-primary">Agendar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+    </section>
+</html>
