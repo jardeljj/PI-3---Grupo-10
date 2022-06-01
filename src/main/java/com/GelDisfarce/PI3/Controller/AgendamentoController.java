@@ -27,17 +27,18 @@ public class AgendamentoController {
 
     @Autowired
     private AgendamentosHorarios AgendamentosHorarios;
-
+    
     @Autowired
     private CadastroClientes CadastroClientes;
-
+    
+    
     @RequestMapping("/novo")
     public ModelAndView novo() {
         ModelAndView mv = new ModelAndView("Agendamento");
         mv.addObject(new CadastroAgendamento());
         return mv;
     }
-
+    
     @RequestMapping(method = RequestMethod.POST)
     public String salvar(@Validated CadastroAgendamento cadastroAgendamento, Errors errors, RedirectAttributes attributes) {
         if (errors.hasErrors()) {
@@ -48,18 +49,19 @@ public class AgendamentoController {
         attributes.addFlashAttribute("mensagem", "Cliente Cadastrado com Sucesso!!!");
         return "redirect:/agendamento/novo";
     }
-
+    
     @RequestMapping
     public ModelAndView ListarCliente(@RequestParam(defaultValue = "") String nome) {
-
+      
         List<CadastroCliente> todosClientes = CadastroClientes.findAll();
-
-        ModelAndView mv = new ModelAndView("Agendamento");
+        
+        
+        ModelAndView mv = new ModelAndView("Agendamento/novo");
         mv.addObject("clientes", todosClientes);
         return mv;
-
+        
     }
-
+    
     /*@RequestMapping
     public ModelAndView ListarAgendamento(@RequestParam(defaultValue = "") String nome) {
       

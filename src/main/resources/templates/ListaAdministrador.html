@@ -9,31 +9,32 @@
         <title>Lista de Administradores</title>    
     </head>
     <section layout:fragment="conteudo">
+        <div th:replace="MensagemGeral"></div>
         <div class="panel panel-default" style="margin-left: 10px; margin-right: 10px">
             <div class="panel-heading">
                 <div class="clearfix">
-                <h1 class="panel-title" style="float: left; padding: 2px">Lista de Administradores</h1>
-                <a class="btn btn-link" style="float: right; padding: 0px"href="/administrador/novo">Novo ADM</a>
+                    <h1 class="panel-title" style="float: left; padding: 2px">Lista de Administradores</h1>
+                    <a class="btn btn-link" style="float: right; padding: 0px"href="/administrador/novo">Novo ADM</a>
                 </div>
             </div>
 
             <div class="panel-body">
-                
+
                 <form method="GET" class="form-horizontal" action="/administrador">
                     <div class="form-group">
                         <div class="col-sm-3">
                             <div class="input-group">
                                 <input class="form-control" placeholder="Pesquise aqui" autofocus="autofocus"
                                        name="nome">
-                                <span class="input-group-btn">
-                                    <button type="submit" class="btn btn-default">
-                                        <i class="glyphicon glyphicon-search"></i>
-                                </span>
+                                    <span class="input-group-btn">
+                                        <button type="submit" class="btn btn-default">
+                                            <i class="glyphicon glyphicon-search"></i>
+                                    </span>
                             </div>
                         </div>                            
                     </div>
                 </form>
-                
+
                 <table class="table table-bordered table-striped">
                     <thead>
                         <tr>
@@ -42,7 +43,7 @@
                             <th class="text-center col-md-2">CPF</th>
                             <th class="text-center col-md-2">Telefone</th>
                             <th class="text-center col-md-2">Editar</th>
-                            
+
                         </tr>
                     </thead>
                     <tbody>
@@ -52,18 +53,24 @@
                             <td class="text-center" th:text="${administrador.CPF}"></td>
                             <td class="text-center" th:text="${administrador.telefone}|"></td>
                             <td class="text-center">
-                            <a class="btn btn-link btn-xs" th:href="@{/administrador/{codigo}(codigo=${administrador.codigo})}">
-                                <span class="glyphicon glyphicon-pencil"></span>
-                            </a>
-                                </td>
+                                <a class="btn btn-link btn-xs" th:href="@{/administrador/{codigo}(codigo=${administrador.codigo})}">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </a>
+                                <a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmaExclusaoAdm"
+                                   th:attr="data-codigo=${administrador.codigo}, data-nome=${administrador.nome}">
+
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </a>
+                            </td>
                         </tr>
                         </tr>
                         <tr>
-                            <td colspan="6" th:if="${#lists.isEmpty(administradores)}">Nenhum titulo achado</td>
+                            <td colspan="6" th:if="${#lists.isEmpty(administradores)}">Nenhum ADM achado</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+        <div th:replace="DialogoExclusaoAdm"></div>
     </section>
 </html>

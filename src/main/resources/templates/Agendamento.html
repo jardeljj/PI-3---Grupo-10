@@ -26,9 +26,10 @@
                     <div class="form-group">
                         <label for="nome" class="col-sm-2 control-label">Nome:</label>
                         <div class="col-sm-2">
-                            <select class="form-control" name="nome" th:field="*{nome}">
-                                <option th:each="nome : ${clientes}" th:value="${nome.nome}" 
+                            <select class="form-control" name="CPF" th:field="*{nome}">
+                                <option th:each="nome : ${clientes}" th:value="{nome.nome}" 
                                         th:text="${nome.nome}"></option>
+                                <option value="">teste</option>
                             </select> 
                         </div>
                     </div>

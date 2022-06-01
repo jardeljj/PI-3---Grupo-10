@@ -63,5 +63,13 @@ public class AdmnistradorController {
         return mv;
     }
 
+    @RequestMapping(value = "{codigo}", method = RequestMethod.DELETE)
+    public String excluir(@PathVariable Long codigo, RedirectAttributes attributes) {
+        CadastroAdministradores.deleteById(codigo);
+
+        attributes.addFlashAttribute("mensagem", "Adminstrador excluído com sucesso!");
+        return "redirect:/administrador";
+    }   
+    
 }
 

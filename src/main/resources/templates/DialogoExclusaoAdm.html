@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" 
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+
+    <div class="modal fade" id="confirmaExclusaoAdm" tabindex="-1" >
+        <div class="modal-dialog">
+            <form th:attr="data-url-base='/administrador'" method="POST" th:method="DELETE">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Você tem certeza?</h4>
+
+                    </div>
+
+                    <div class="modal-body">
+                        <span>Tem certeza que deseja apagar o título?</span>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Excluir</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $('#confirmaExclusaoAdm').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+
+            var codigoAdministrador = button.data('codigo');
+            var nomeAdministrador = button.data('nome');
+
+
+            var modal = $(this);
+            var form = modal.find('form');
+            var action = form.data('url-base');
+            if (!action.endsWith('/')) {
+                action += '/';
+            }
+            form.attr('action', action + codigoAdministrador);
+
+            modal.find('.modal-body span').html('Tem certeza que deseja excluir o ADM <strong>' + nomeAdministrador + '</strong>?');
+        });
+    </script>
+</html>
