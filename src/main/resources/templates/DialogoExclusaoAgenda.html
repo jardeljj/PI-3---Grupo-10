@@ -4,9 +4,9 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 
-    <div class="modal fade" id="confirmaExclusaoAdm" tabindex="-1" >
+    <div class="modal fade" id="confirmaExclusaoAgenda" tabindex="-1" >
         <div class="modal-dialog">
-            <form th:attr="data-url-base='/administrador'" method="POST" th:method="DELETE">
+            <form th:attr="data-url-base='/agendamento'" method="POST" th:method="DELETE">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title">Você tem certeza?</h4>
@@ -14,7 +14,7 @@
                     </div>
 
                     <div class="modal-body">
-                        <span>Tem certeza que deseja apagar o adm?</span>
+                        <span>Tem certeza que deseja apagar o agendamento?</span>
                     </div>
 
                     <div class="modal-footer">
@@ -28,11 +28,11 @@
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
-        $('#confirmaExclusaoAdm').on('show.bs.modal', function (event) {
+        $('#confirmaExclusaoAgenda').on('show.bs.modal', function (event) {
             var button = $(event.relatedTarget);
 
-            var codigoAdministrador = button.data('codigo');
-            var nomeAdministrador = button.data('nome');
+            var codigoAgendamento = button.data('codigo');
+            var nomeCliente = button.data('nome');
 
 
             var modal = $(this);
@@ -41,9 +41,9 @@
             if (!action.endsWith('/')) {
                 action += '/';
             }
-            form.attr('action', action + codigoAdministrador);
+            form.attr('action', action + codigoAgendamento);
 
-            modal.find('.modal-body span').html('Tem certeza que deseja excluir o ADM <strong>' + nomeAdministrador + '</strong>?');
+            modal.find('.modal-body span').html('Tem certeza que deseja excluir o produto <strong>' + nomeCliente + '</strong>?');
         });
     </script>
     <script>

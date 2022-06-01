@@ -22,15 +22,11 @@
                 </div>
 
                 <div class="panel-body">
-
-                    <div class="form-group">
+                    <input type="hidden" th:field="*{codigo}"/>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('nome')} ? has-error">
                         <label for="nome" class="col-sm-2 control-label">Nome:</label>
-                        <div class="col-sm-2">
-                            <select class="form-control" name="CPF" th:field="*{nome}">
-                                <option th:each="nome : ${clientes}" th:value="{nome.nome}" 
-                                        th:text="${nome.nome}"></option>
-                                <option value="">teste</option>
-                            </select> 
+                        <div class="col-sm-4"> 
+                            <input type="text" class="form-control" id="nome" th:field="*{nome}" />
                         </div>
                     </div>
                     <div class="form-group" th:classappend="${#fields.hasErrors('dataAgendada')} ? has-error">
