@@ -53,11 +53,13 @@
                             <td class="text-center" th:text="${administrador.CPF}"></td>
                             <td class="text-center" th:text="${administrador.telefone}|"></td>
                             <td class="text-center">
-                                <a class="btn btn-link btn-xs" th:href="@{/administrador/{codigo}(codigo=${administrador.codigo})}">
+                                <a class="btn btn-link btn-xs" th:href="@{/administrador/{codigo}(codigo=${administrador.codigo})}"
+                                   title="Editar" rel="tooltip" data-placement="top">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </a>
                                 <a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmaExclusaoAdm"
-                                   th:attr="data-codigo=${administrador.codigo}, data-nome=${administrador.nome}">
+                                   th:attr="data-codigo=${administrador.codigo}, data-nome=${administrador.nome}"
+                                   title="Excluir" rel="tooltip" data-placement="top">
 
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </a>

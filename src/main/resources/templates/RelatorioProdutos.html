@@ -57,12 +57,14 @@
                                       th:classappend="${produto.produto ? 'label-primary' : 'label-warning'}"></span>
                             </td>
                             <td class="text-center">
-                                <a class="btn btn-link btn-xs" th:href="@{/produto/{codigo}(codigo=${produto.codigo})}">
+                                <a class="btn btn-link btn-xs" th:href="@{/produto/{codigo}(codigo=${produto.codigo})}"
+                                   title="Editar" rel="tooltip" data-placement="top">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </a>
 
                                 <a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmacaoExclusaoModal"
-                                   th:attr="data-codigo=${produto.codigo}, data-nome=${produto.nome}">
+                                   th:attr="data-codigo=${produto.codigo}, data-nome=${produto.nome}"
+                                   title="Excluir" rel="tooltip" data-placement="top">
 
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </a>
@@ -70,12 +72,12 @@
                         </tr>
 
                         <tr>
-                            <td colspan="6" th:if="${#lists.isEmpty(produtos)}">Nenhum titulo achado</td>
+                            <td colspan="6" th:if="${#lists.isEmpty(produtos)}">Nenhum produto achado</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
-        <div th:replace="DialogoConfirmacaoExclusao"></div>
+        <div th:replace="DialogoConfirmacaoProd"></div>
     </section>
 </html>

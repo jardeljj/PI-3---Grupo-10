@@ -71,11 +71,13 @@
                                       th:classappend="${funcionario.caixa ? 'label-primary' : 'label-danger'}"></span>
                             </td>
                             <td class="text-center">
-                                <a class="btn btn-link btn-xs" th:href="@{/funcionario/{codigo}(codigo=${funcionario.codigo})}">
+                                <a class="btn btn-link btn-xs" th:href="@{/funcionario/{codigo}(codigo=${funcionario.codigo})}"
+                                   title="Editar" rel="tooltip" data-placement="top">
                                     <span class="glyphicon glyphicon-pencil"></span>
                                 </a>
                                 <a class="btn btn-link btn-xs" data-toggle="modal" data-target="#confirmaExclusaoFunc"
-                                   th:attr="data-codigo=${funcionario.codigo}, data-nome=${funcionario.nome}">
+                                   th:attr="data-codigo=${funcionario.codigo}, data-nome=${funcionario.nome}"
+                                   title="Excluir" rel="tooltip" data-placement="top">
 
                                     <span class="glyphicon glyphicon-trash"></span>
                                 </a>
